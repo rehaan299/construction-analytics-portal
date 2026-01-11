@@ -1,0 +1,52 @@
+
+## `docker-compose.yml`
+```yaml
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: portal_sql
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=${SQL_SA_PASSWORD}
+    ports:
+      - "1433:1433"
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${SQL_SA_PASSWORD} -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    volumes:
+      - sql_data:/var/opt/mssql
+
+  api:
+    build:
+      context: ./src/backend
+      dockerfile: ConstructionPortal.Api/Dockerfile
+    container_name: portal_api
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Server=db;Database=ConstructionPortalDb;User Id=sa;Password=${SQL_SA_PASSWORD};TrustServerCertificate=True;
+      - Jwt__Issuer=ConstructionPortal
+      - Jwt__Audience=ConstructionPortalUsers
+      - Jwt__Key=${JWT_KEY}
+      - Seed__Enable=true
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+
+  ui:
+    build:
+      context: ./src/frontend/portal-ui
+      dockerfile: Dockerfile
+    container_name: portal_ui
+    environment:
+      - API_BASE_URL=http://localhost:8080
+    depends_on:
+      - api
+    ports:
+      - "4200:80"
+
+volumes:
+  sql_data:
