@@ -113,7 +113,11 @@ Everything needed to understand **what the system does, why it exists, and how i
 4. **Alert rules run automatically**  
    - budget burn thresholds  
    - daily cost spikes  
-   - basic productivity risk indicators  
+   - basic productivity risk indicators
+   - 
+     <p align="center">
+  <img src="images/alerts.png" width="800">
+</p>
 
 5. **Corporate users** see updated KPIs and alerts immediately  
 
@@ -124,6 +128,9 @@ Architecture diagrams are included in:
 
 ---
 
+<p align="center">
+  <img src="images/portal.png" width="800">
+</p>
 ## User roles (enterprise-style access control)
 
 This project uses role-based access to reflect real internal systems.
