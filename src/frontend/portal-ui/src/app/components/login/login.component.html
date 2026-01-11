@@ -1,0 +1,20 @@
+<div class="card">
+  <h2>Portal Login</h2>
+  <p style="color:#666">Demo passwords: <b>Password123!</b></p>
+
+  <div class="input">
+    <label>Username</label>
+    <input [(ngModel)]="username" />
+  </div>
+
+  <div class="input">
+    <label>Password</label>
+    <input type="password" [(ngModel)]="password" />
+  </div>
+
+  <button class="btn-primary" (click)="submit()">Login</button>
+  <p style="color:#c00" *ngIf="error">{{ error }}</p>
+
+  <hr />
+  <p><b>Demo users:</b> field1, pm1, finance1, exec1, admin</p>
+</div>
