@@ -10,6 +10,10 @@
 
 ---
 
+<p align="center">
+  <img src="images/dashboard.png" width="800">
+</p>
+
 ## Why I built this
 
 In large construction organizations, there is often a gap between:
