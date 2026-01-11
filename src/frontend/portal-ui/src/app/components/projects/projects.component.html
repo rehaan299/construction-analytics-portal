@@ -1,0 +1,18 @@
+<div class="card">
+  <h2>Projects</h2>
+  <p style="color:#666">Select a project to submit reports or view dashboard KPIs.</p>
+
+  <div *ngIf="loading">Loading...</div>
+
+  <div class="row" *ngIf="!loading">
+    <div class="card" style="flex:1; min-width: 280px;" *ngFor="let p of projects">
+      <h3>{{ p.code }} — {{ p.name }}</h3>
+      <p>Budget: <b>${{ p.budget | number:'1.0-0' }}</b></p>
+      <p>Planned: {{ p.startDate }} → {{ p.endDatePlanned }}</p>
+      <div class="row">
+        <a class="btn-secondary" [routerLink]="['/report', p.id]" style="text-align:center; padding:10px 14px; border-radius:10px; display:inline-block;">Daily Report</a>
+        <a class="btn-primary" [routerLink]="['/dashboard', p.id]" style="text-align:center; padding:10px 14px; border-radius:10px; display:inline-block;">Dashboard</a>
+      </div>
+    </div>
+  </div>
+</div>
