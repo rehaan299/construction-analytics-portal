@@ -1,0 +1,4 @@
+ProjectCode,ReportDate,LaborHours,EquipmentHours,ProgressPercent,Notes,SubmittedBy
+ALPHA,2026-01-07,110,20,4,"Equipment downtime 1hr",field1
+ALPHA,2026-01-08,130,25,5,"Material delivery arrived late",field1
+BRAVO,2026-02-04,90,40,2,"Backfill started",field1
