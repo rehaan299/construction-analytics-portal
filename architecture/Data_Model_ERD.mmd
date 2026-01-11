@@ -1,0 +1,46 @@
+erDiagram
+  PROJECT ||--o{ DAILY_FIELD_REPORT : has
+  PROJECT ||--o{ COST_ENTRY : has
+  PROJECT ||--o{ ALERT : has
+
+  PROJECT {
+    int Id PK
+    string Code
+    string Name
+    date StartDate
+    date EndDatePlanned
+    decimal Budget
+  }
+
+  DAILY_FIELD_REPORT {
+    int Id PK
+    int ProjectId FK
+    date ReportDate
+    int LaborHours
+    int EquipmentHours
+    int ProgressPercent
+    string Notes
+    string SubmittedBy
+    datetime CreatedAt
+  }
+
+  COST_ENTRY {
+    int Id PK
+    int ProjectId FK
+    date CostDate
+    string CostCode
+    decimal Amount
+    string Description
+    string Source
+    datetime CreatedAt
+  }
+
+  ALERT {
+    int Id PK
+    int ProjectId FK
+    string AlertType
+    string Severity
+    string Message
+    bit Resolved
+    datetime CreatedAt
+  }
