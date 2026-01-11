@@ -1,0 +1,4 @@
+ProjectCode,CostDate,CostCode,Amount,Description,Source
+ALPHA,2026-01-07,MATERIAL_STEEL,65000,"Steel delivery phase 1",ERP_SIM
+ALPHA,2026-01-08,LABOR,21000,"Overtime for schedule recovery",ERP_SIM
+BRAVO,2026-02-04,EQUIPMENT,12000,"Loader rental",ERP_SIM
