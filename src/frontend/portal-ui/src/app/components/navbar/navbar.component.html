@@ -1,0 +1,8 @@
+<div class="nav">
+  <a routerLink="/projects">Projects</a>
+  <span *ngIf="loggedIn()">Role: {{ role() }}</span>
+  <span style="float:right">
+    <a *ngIf="!loggedIn()" routerLink="/login">Login</a>
+    <a *ngIf="loggedIn()" href="#" (click)="logout()">Logout</a>
+  </span>
+</div>
