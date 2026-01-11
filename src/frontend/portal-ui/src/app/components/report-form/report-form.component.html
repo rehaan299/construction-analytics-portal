@@ -1,0 +1,33 @@
+<div class="card">
+  <h2>Daily Field Report</h2>
+  <p><a routerLink="/projects">← Back to Projects</a></p>
+
+  <div class="row">
+    <div class="input" style="min-width:220px">
+      <label>Date</label>
+      <input type="date" [(ngModel)]="reportDate" />
+    </div>
+    <div class="input" style="min-width:220px">
+      <label>Labor Hours</label>
+      <input type="number" [(ngModel)]="laborHours" />
+    </div>
+    <div class="input" style="min-width:220px">
+      <label>Equipment Hours</label>
+      <input type="number" [(ngModel)]="equipmentHours" />
+    </div>
+    <div class="input" style="min-width:220px">
+      <label>Progress %</label>
+      <input type="number" [(ngModel)]="progressPercent" />
+    </div>
+  </div>
+
+  <div class="input">
+    <label>Notes / Issues</label>
+    <textarea rows="4" [(ngModel)]="notes"></textarea>
+  </div>
+
+  <button class="btn-primary" (click)="submit()">Submit</button>
+
+  <p style="color:green" *ngIf="message">{{ message }}</p>
+  <p style="color:#c00" *ngIf="error">{{ error }}</p>
+</div>
