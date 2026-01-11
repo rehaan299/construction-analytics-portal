@@ -1,0 +1,23 @@
+ name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  backend-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      reminder:
+        run: echo "CI builds backend (frontend build optional)."
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Restore
+        run: dotnet restore src/backend/ConstructionPortal.Api/ConstructionPortal.Api.csproj
+      - name: Build
+        run: dotnet build src/backend/ConstructionPortal.Api/ConstructionPortal.Api.csproj -c Release --no-restore
+      - name: Test
+        run: dotnet test src/backend/ConstructionPortal.Api.Tests/ConstructionPortal.Api.Tests.csproj -c Release
