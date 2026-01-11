@@ -1,0 +1,50 @@
+CREATE TABLE Projects (
+  Id INT IDENTITY(1,1) PRIMARY KEY,
+  Code NVARCHAR(50) NOT NULL UNIQUE,
+  Name NVARCHAR(200) NOT NULL,
+  StartDate DATE NOT NULL,
+  EndDatePlanned DATE NOT NULL,
+  Budget DECIMAL(18,2) NOT NULL
+);
+
+CREATE TABLE DailyFieldReports (
+  Id INT IDENTITY(1,1) PRIMARY KEY,
+  ProjectId INT NOT NULL,
+  ReportDate DATE NOT NULL,
+  LaborHours INT NOT NULL,
+  EquipmentHours INT NOT NULL,
+  ProgressPercent INT NOT NULL,
+  Notes NVARCHAR(2000) NULL,
+  SubmittedBy NVARCHAR(100) NOT NULL,
+  CreatedAt DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+  CONSTRAINT FK_DailyReports_Project FOREIGN KEY (ProjectId) REFERENCES Projects(Id)
+);
+
+CREATE INDEX IX_DailyReports_ProjectDate ON DailyFieldReports(ProjectId, ReportDate);
+
+CREATE TABLE CostEntries (
+  Id INT IDENTITY(1,1) PRIMARY KEY,
+  ProjectId INT NOT NULL,
+  CostDate DATE NOT NULL,
+  CostCode NVARCHAR(100) NOT NULL,
+  Amount DECIMAL(18,2) NOT NULL,
+  Description NVARCHAR(500) NULL,
+  Source NVARCHAR(50) NOT NULL,
+  CreatedAt DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+  CONSTRAINT FK_CostEntries_Project FOREIGN KEY (ProjectId) REFERENCES Projects(Id)
+);
+
+CREATE INDEX IX_CostEntries_ProjectDate ON CostEntries(ProjectId, CostDate);
+
+CREATE TABLE Alerts (
+  Id INT IDENTITY(1,1) PRIMARY KEY,
+  ProjectId INT NOT NULL,
+  AlertType NVARCHAR(100) NOT NULL,
+  Severity NVARCHAR(20) NOT NULL,
+  Message NVARCHAR(1000) NOT NULL,
+  Resolved BIT NOT NULL DEFAULT 0,
+  CreatedAt DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+  CONSTRAINT FK_Alerts_Project FOREIGN KEY (ProjectId) REFERENCES Projects(Id)
+);
+
+CREATE INDEX IX_Alerts_ProjectResolved ON Alerts(ProjectId, Resolved);
