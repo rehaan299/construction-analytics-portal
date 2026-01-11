@@ -1,0 +1,44 @@
+<div class="card">
+  <h2>Project Dashboard</h2>
+  <p><a routerLink="/projects">← Back to Projects</a></p>
+
+  <div *ngIf="loading">Loading...</div>
+
+  <div *ngIf="!loading && kpis">
+    <div class="row">
+      <div class="card" style="flex:1; min-width:250px;">
+        <h3>Budget</h3>
+        <p><b>${{ kpis.budget | number:'1.0-0' }}</b></p>
+      </div>
+
+      <div class="card" style="flex:1; min-width:250px;">
+        <h3>Actual Cost (to date)</h3>
+        <p><b>${{ kpis.actualCostToDate | number:'1.0-0' }}</b></p>
+        <p>Used: <b>{{ (kpis.budgetUsedPercent * 100) | number:'1.0-1' }}%</b></p>
+      </div>
+
+      <div class="card" style="flex:1; min-width:250px;">
+        <h3>Latest Progress</h3>
+        <p><b>{{ kpis.latestProgressPercent }}%</b></p>
+      </div>
+
+      <div class="card" style="flex:1; min-width:250px;">
+        <h3>Last 7 Days</h3>
+        <p>Labor Hours: <b>{{ kpis.last7DaysLaborHours }}</b></p>
+        <p>Cost: <b>${{ kpis.last7DaysCost | number:'1.0-0' }}</b></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Active Alerts ({{ kpis.activeAlertsCount }})</h3>
+      <div *ngIf="alerts.length === 0" style="color:#666">No active alerts.</div>
+
+      <div *ngFor="let a of alerts" style="margin-bottom:10px;">
+        <span [class]="badgeClass(a.severity)">{{ a.severity }}</span>
+        <b style="margin-left:8px;">{{ a.alertType }}</b>
+        <div style="color:#333">{{ a.message }}</div>
+        <div style="color:#888; font-size:12px;">{{ a.createdAt }}</div>
+      </div>
+    </div>
+  </div>
+</div>
