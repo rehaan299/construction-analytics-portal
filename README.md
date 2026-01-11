@@ -1,79 +1,176 @@
-# Integrated Construction Analytics & Workflow Portal (Enterprise Construction Prototype)
+# Integrated Construction Analytics & Workflow Portal  
+**Enterprise Construction Portfolio Project**
 
-> A deployable internal portal prototype that connects **field reporting** with **corporate visibility** (cost, labor, progress), designed for **enterprise construction companies (e.g., PCL Construction and peers)**.
+> I built a deployable internal portal that connects **daily construction field reporting** with **corporate project visibility** (cost, labor, progress).
 >
-> ⚠️ This is a **portfolio prototype** using **synthetic data** and **simulated ERP feeds**. It is **not affiliated with or endorsed by any company**.
+> This project is designed to reflect how **large enterprise construction companies (e.g., firms like PCL and similar organizations)** operate internally.
+>
+> ⚠️ This is a **personal portfolio project** using **synthetic data** and **simulated ERP integrations**.  
+> It is **not affiliated with or endorsed by any company**.
 
 ---
 
-## Why this exists (business problem)
+## Why I built this
 
-Large construction enterprises run complex operations across:
-- **Site crews** (foremen, superintendents, engineers) entering daily production reality
-- **Corporate staff** (PMs, finance, cost control, operations leadership) needing timely visibility
+In large construction organizations, there is often a gap between:
 
-In many real environments, progress and cost data is fragmented across spreadsheets, manual reporting, and legacy ERP modules. That delay causes:
-- late intervention on overruns
-- duplicate data entry
-- weak real-time decision making
+- **What happens on site** (daily labor, progress, issues)
+- **What corporate teams see** (cost reports, budget status, KPIs)
 
-**Goal:** Provide **one internal system** that captures daily site signals and makes them actionable through:
-- a central SQL database
-- integration-style ERP sync (simulated)
-- workflow automation (alerts)
-- dashboards and KPI endpoints
+In many real environments, this data is:
+- spread across spreadsheets  
+- manually re-entered into ERP systems  
+- reported weeks after the work actually happens  
 
----
+That delay leads to:
+- late awareness of cost overruns  
+- slow reaction to productivity issues  
+- duplicated effort between site and office teams  
 
-## What you get in this repo
+### The problem I wanted to solve
 
-### ✅ Full-stack system (deployable)
-- **Backend:** ASP.NET Core 8 Web API (JWT auth, role-based access, EF Core)
-- **Database:** SQL Server (container) with schema + seed
-- **Frontend:** Angular portal UI (login, projects, daily report form, dashboard)
-- **Automation:** PowerShell “AlertRunner” (stand-in for Power Automate)
-- **Docs:** BRD, functional spec, use cases, UAT plan, training guide
-- **Architecture diagrams:** Mermaid source files
-- **Synthetic data scripts:** generator + importer
+> *How can daily field data flow into corporate systems quickly, consistently, and in a way that actually supports decision-making?*
 
----
+### The goal of this project
 
-## High-level architecture
+To design and build **one internal system** that:
+- captures daily site activity in a structured way  
+- stores it in a central enterprise database  
+- integrates with corporate financial data (simulated ERP)  
+- automatically flags risk conditions  
+- exposes clean, real-time KPIs for project and finance teams  
 
-**Data flow:**
-1) Foreman submits daily report (hours, progress, notes) via Angular UI  
-2) API writes to SQL Server (single source of truth)  
-3) ERP sync service (simulated) imports budgets/cost codes/cost entries  
-4) Alert rules evaluate thresholds (budget burn, daily cost spikes, schedule risk proxies)  
-5) Corporate users see dashboards / alerts immediately
-
-See diagrams in:
-- `architecture/System_Architecture.mmd`
-- `architecture/Data_Model_ERD.mmd`
-- `architecture/Process_Flow_Workflow.mmd`
+This mirrors the type of internal tools used inside large construction firms — not a startup app, but a **practical enterprise system**.
 
 ---
 
-## Roles (RBAC)
+## What this repository contains
 
-This prototype supports enterprise role separation:
+This repo is intentionally complete. It reflects how an internal enterprise project would actually be handed off.
 
-- **FieldUser** (Foreman/Superintendent): submit reports, view their project(s)
-- **ProjectManager**: view project dashboards, review reports, see alerts
-- **Finance**: view all projects, costs, budget health, alerts
-- **Executive**: portfolio view (aggregate)
-- **Admin**: seed/manage users (prototype)
+### Full-stack application (deployable)
+
+- **Backend:** ASP.NET Core 8 Web API  
+  - JWT authentication  
+  - role-based access control  
+  - Entity Framework Core  
+
+- **Database:** SQL Server (containerized)  
+  - normalized schema  
+  - indexes and referential integrity  
+
+- **Frontend:** Angular portal UI  
+  - login  
+  - project list  
+  - daily field report form  
+  - project dashboard  
+
+- **Workflow automation:**  
+  - PowerShell alert runner (stand-in for Power Automate)  
+
+- **Documentation:**  
+  - Business Requirements  
+  - Functional Specification  
+  - Use Cases  
+  - UAT Test Plan  
+  - Training Guide  
+
+- **Architecture & data diagrams:**  
+  - system architecture  
+  - ER diagram  
+  - workflow flowchart  
+
+- **Synthetic data tooling:**  
+  - data generator  
+  - CSV import scripts  
+
+Everything needed to understand **what the system does, why it exists, and how it works** is included.
 
 ---
 
-## Quickstart (Docker)
+## High-level system architecture
 
-### 1) Prereqs
-- Docker Desktop
-- (Optional for local dev) Node 20+, .NET 8 SDK
+### How data flows through the system
 
-### 2) Configure environment
-Copy `.env.example` to `.env`:
+1. A **site foreman** submits a daily report  
+   - labor hours  
+   - equipment hours  
+   - progress percentage  
+   - notes / issues  
 
+2. The **API stores the data** in SQL Server  
+   - single source of truth  
+
+3. A **simulated ERP integration** brings in:  
+   - budgets  
+   - cost codes  
+   - actual costs  
+
+4. **Alert rules run automatically**  
+   - budget burn thresholds  
+   - daily cost spikes  
+   - basic productivity risk indicators  
+
+5. **Corporate users** see updated KPIs and alerts immediately  
+
+Architecture diagrams are included in:
+- `architecture/System_Architecture.mmd`  
+- `architecture/Data_Model_ERD.mmd`  
+- `architecture/Process_Flow_Workflow.mmd`  
+
+---
+
+## User roles (enterprise-style access control)
+
+This project uses role-based access to reflect real internal systems.
+
+- **FieldUser (Foreman / Superintendent)**  
+  - submit daily reports  
+  - view assigned projects only  
+
+- **ProjectManager**  
+  - view project dashboards  
+  - review progress and alerts  
+
+- **Finance / Cost Control**  
+  - view all projects  
+  - monitor budget vs actual  
+  - investigate cost spikes  
+
+- **Executive / Operations**  
+  - high-level portfolio visibility  
+
+- **Admin**  
+  - seed data  
+  - run ERP imports  
+  - trigger alert evaluations  
+
+This separation is intentional and mirrors how enterprise systems are typically structured.
+
+---
+
+## Why this design is realistic
+
+This project intentionally avoids “toy app” patterns.
+
+It reflects:
+- **Microsoft-centric enterprise stacks** (SQL Server, .NET, Power Platform concepts)  
+- **integration-first thinking** (field → ERP → analytics)  
+- **process awareness** (alerts, approvals, reporting cadence)  
+- **data modeling discipline** (normalized schema, clear relationships)  
+
+The goal was not just to make something work, but to make it look and feel like something that could exist inside a real construction organization.
+
+---
+
+## Running the project locally (Docker)
+
+### Prerequisites
+- Docker Desktop  
+- (Optional) Node.js 20+, .NET 8 SDK for local development  
+
+### Setup
+
+Copy environment variables:
 ```bash
 cp .env.example .env
