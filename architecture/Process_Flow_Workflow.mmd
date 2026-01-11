@@ -1,0 +1,7 @@
+flowchart TD
+  A[Foreman submits Daily Report] --> B[API validates & stores]
+  B --> C[Evaluate alert rules]
+  C -->|No breach| D[Dashboard updates]
+  C -->|Breach| E[Create Alert]
+  E --> F[Automation sends notification (demo: log/email)]
+  F --> D
