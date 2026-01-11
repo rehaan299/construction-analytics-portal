@@ -1,0 +1,14 @@
+flowchart LR
+  Field[Field Crew<br/>Tablet/Laptop] -->|HTTPS| UI[Angular Portal UI]
+  UI -->|REST API| API[ASP.NET Core API]
+  API --> DB[(SQL Server)]
+
+  ERP[ERP System<br/>(simulated feed)] -->|CSV/API stub| Sync[ERP Sync Service]
+  Sync --> DB
+
+  DB --> KPI[Dashboards/KPI Endpoints]
+  KPI --> Corp[Corporate Users<br/>(PM/Finance/Exec)]
+
+  API --> Alerts[Alert Rules Engine]
+  Alerts --> DB
+  Auto[Automation Runner<br/>(Power Automate stand-in)] -->|Schedule| API
