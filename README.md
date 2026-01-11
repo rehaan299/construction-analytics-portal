@@ -1,10 +1,10 @@
 # Integrated Construction Analytics & Workflow Portal  
 **Enterprise Construction Portfolio Project**
 
-** I built a deployable internal portal that connects **daily construction field reporting** with **corporate project visibility** (cost, labor, progress).**
->
->** This project is designed to reflect how **large enterprise construction companies (e.g., firms like PCL and similar organizations)** operate internally.**
->
+**I built a deployable internal portal that connects daily construction field reporting** with corporate project visibility (cost, labor, progress).**
+
+>** This project is designed to reflect how large enterprise construction companies (e.g., firms like PCL and similar organizations) operate internally.**
+
 > ⚠️ This is a **personal portfolio project** using **synthetic data** and **simulated ERP integrations**.  
 > It is **not affiliated with or endorsed by any company**.
 
